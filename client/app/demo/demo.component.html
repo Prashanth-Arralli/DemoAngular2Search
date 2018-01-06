@@ -8,7 +8,7 @@
       <hr class="pt-1">
       <div *ngIf="yearFilters.length" style="display: inline-block;">
         <div class="dropdown pr-1" dropdown>
-          <a dropdown-open style="font-size: 13px; font-style: italic; cursor: pointer;"> Year &#x25BC; </a>
+          <a dropdown-open style="font-size: 13px; font-style: italic; cursor: pointer;"> Year-({{yearSelected}}) &#x25BC; </a>
             <ul class="dropdown-menu">
               <div *ngFor="let filter of yearFilters">
                 <li><a (click)="applyFiler(filter, 'year')">  {{filter}}</a></li>
@@ -18,7 +18,7 @@
       </div>
       <div *ngIf="typeFilters.length" style="display: inline-block;">
         <div class="dropdown  pr-1" style="display: inline-block;" dropdown>
-          <a dropdown-open style="font-size: 13px; font-style: italic; cursor: pointer;"> docType &#x25BC; </a>
+          <a dropdown-open style="font-size: 13px; font-style: italic; cursor: pointer;"> docType-({{doctypeSelected}}) &#x25BC; </a>
             <ul class="dropdown-menu">
               <div *ngFor="let filter of typeFilters">
                 <li><a (click)="applyFiler(filter, 'doctype')">  {{filter}}</a></li>
@@ -28,13 +28,16 @@
       </div>
       <div *ngIf="categoryFilters.length" style="display: inline-block;">
         <div class="dropdown" dropdown>
-          <a dropdown-open style="font-size: 13px; font-style: italic; cursor: pointer;"> Category &#x25BC; </a>
+          <a dropdown-open style="font-size: 13px; font-style: italic; cursor: pointer;"> Category-({{categorySelected}}) &#x25BC; </a>
             <ul class="dropdown-menu">
               <div *ngFor="let filter of categoryFilters">
                 <li><a (click)="applyFiler(filter, 'category')">  {{filter}}</a></li>
               </div>
             </ul>
         </div>
+      </div>
+      <div style="display: inline-block;">
+        <button (click)="clearFilters()" style="font-size: 13px; cursor: pointer;"> Clear Filters </button>
       </div>
       <div class="search-results pt-1"
 		    infiniteScroll

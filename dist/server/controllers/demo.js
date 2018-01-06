@@ -54,21 +54,23 @@ var DemoCtrl = (function (_super) {
                 var name_1 = req.query.name;
                 var startIndex_1 = req.query.startIndex;
                 var maxLimit_1 = req.query.maxLimit;
-                var args_1 = { userqueries: name_1 };
+                ;
+                var args = {};
+                args.userqueries = name_1;
                 if (req.query.year) {
-                    args_1.year = req.query.year;
+                    args.year = req.query.year;
                 }
                 if (req.query.doctype) {
-                    args_1.doctype = req.query.doctype;
+                    args.doctype = req.query.doctype;
                 }
                 if (req.query.category) {
-                    args_1.category = req.query.category;
+                    args.category = req.query.category;
                 }
                 var total_1 = 0;
-                _this.model.count(args_1)
+                _this.model.count(args)
                     .then(function (count) {
                     total_1 = count;
-                    _this.model.find(args_1, function (err, docs) {
+                    _this.model.find(args, function (err, docs) {
                         if (err) {
                             return console.error(err);
                         }

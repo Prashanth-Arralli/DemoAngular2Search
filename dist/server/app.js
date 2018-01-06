@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'test') {
     mongodbURI = process.env.MONGODB_TEST_URI;
 }
 else {
-    mongodbURI = process.env.MONGODB_URI;
+    mongodbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/angularfullstack';
     app.use(morgan('dev'));
 }
 mongoose.Promise = global.Promise;

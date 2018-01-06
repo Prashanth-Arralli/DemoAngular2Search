@@ -35,7 +35,10 @@ export class DemoComponent implements OnInit {
   typeFilters = [];
   categoryFilters = [];
   selectedFilters = [];
-
+  yearSelected:string ;
+  categorySelected:string ;
+  doctypeSelected:string ;
+  key:string ;
   constructor(private demoService: DemoService,
               private activatedRoute: ActivatedRoute) { }
 
@@ -59,7 +62,7 @@ export class DemoComponent implements OnInit {
         this.names = this.names.filter((elem, index, self) => index === self.indexOf(elem));
         console.log(this.names);
       },
-      error => console.log(error);
+      error => console.log(error)
     )
   }
 
@@ -70,7 +73,15 @@ export class DemoComponent implements OnInit {
       history.replaceState('', '', '/demo/search?q=' + key)
       this.previousSearch = key;
       this.getFilters(key);
+      this.clearFilters() ;
     }
+  }
+  clearFilters(){
+    this.yearSelected = "" ;
+    this.doctypeSelected = "" ;
+    this.categorySelected = "" ;
+
+    this.getResults();
   }
 
   getFilters(key) {
@@ -97,14 +108,15 @@ export class DemoComponent implements OnInit {
         console.log(this.typeFilters);
         console.log(this.categoryFilters);
 
-      }
-      err => console.log(err);
+      },
+      err => console.log(err)
     )
   }
 
   applyFiler(value, field) {
     console.log(value);
     console.log(field);
+    this[field+'Selected']  = value ;
     this.selectedFilters[field] = value;
     this.resetState('');
     this.getResultOnSearch();
@@ -135,7 +147,7 @@ export class DemoComponent implements OnInit {
               item.description = item.description.replace(new RegExp(key, 'g'), `<strong>${key}</strong>`);
             })
             this.searchList = this.searchList.concat(res.data);
-          }
+          },
           error => console.log(error)
         );
       }
